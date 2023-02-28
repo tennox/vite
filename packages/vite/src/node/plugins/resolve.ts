@@ -817,6 +817,7 @@ export function tryNodeResolve(
 
   if (
     !options.ssrOptimizeCheck &&
+    !resolved.includes('/bygonz/index.mjs') &&
     (!resolved.includes('node_modules') || // linked
       !depsOptimizer || // resolving before listening to the server
       options.scan) // initial esbuild scan phase
