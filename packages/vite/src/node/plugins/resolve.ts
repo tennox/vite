@@ -815,9 +815,19 @@ export function tryNodeResolve(
   const isCJS =
     ext === '.cjs' || (ext === '.js' && nearestPkg.data.type !== 'module')
 
+  // eslint-disable-next-line no-console
+  console.log(
+    'ssrOptimizeCheck skip?',
+    !options.ssrOptimizeCheck &&
+      !resolved.includes('/bygonz/dist/') &&
+      (!resolved.includes('node_modules') || // linked
+        !depsOptimizer || // resolving before listening to the server
+        options.scan), // initial esbuild scan phase
+    resolved,
+  )
   if (
     !options.ssrOptimizeCheck &&
-    !resolved.includes('/bygonz/index.mjs') &&
+    !resolved.includes('/bygonz/dist/') &&
     (!resolved.includes('node_modules') || // linked
       !depsOptimizer || // resolving before listening to the server
       options.scan) // initial esbuild scan phase
