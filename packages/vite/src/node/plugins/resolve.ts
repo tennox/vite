@@ -815,19 +815,20 @@ export function tryNodeResolve(
   const isCJS =
     ext === '.cjs' || (ext === '.js' && nearestPkg.data.type !== 'module')
 
-  // eslint-disable-next-line no-console
-  console.log(
-    'ssrOptimizeCheck skip?',
-    !options.ssrOptimizeCheck &&
-      !resolved.includes('/bygonz/dist/') &&
-      (!resolved.includes('node_modules') || // linked
-        !depsOptimizer || // resolving before listening to the server
-        options.scan), // initial esbuild scan phase
-    resolved,
-  )
+  if (resolved.includes('bygonz') || resolved.includes('ztax'))
+    // eslint-disable-next-line no-console
+    console.log(
+      'ssrOptimizeCheck?',
+      !options.ssrOptimizeCheck &&
+        !resolved.includes('/bygonz-js/dist/') &&
+        (!resolved.includes('node_modules') || // linked
+          !depsOptimizer || // resolving before listening to the server
+          options.scan), // initial esbuild scan phase
+      resolved,
+    )
   if (
     !options.ssrOptimizeCheck &&
-    !resolved.includes('/bygonz/dist/') &&
+    !resolved.includes('/bygonz-js/dist/') &&
     (!resolved.includes('node_modules') || // linked
       !depsOptimizer || // resolving before listening to the server
       options.scan) // initial esbuild scan phase

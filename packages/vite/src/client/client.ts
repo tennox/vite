@@ -102,6 +102,13 @@ function setupWebSocket(
 
     console.log(`[vite] server connection lost. polling for restart...`)
     await waitForSuccessfulPing(protocol, hostAndPath)
+    console.log(`[vite] server back - reloading!`, {
+      window,
+      self,
+      location,
+      parent,
+      top,
+    })
     location.reload()
   })
 
